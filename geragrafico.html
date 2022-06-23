@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+	<title>Create Graph</title>
+<py-env>
+- matplotlib
+</py-env>
+<style type="text/css">
+	body{
+		display: flex !important;
+		align-items: center !important;
+		flex-direction: column !important;
+		justify-content: center !important;
+	}
+</style>
+</head>
+<body>
+<br>
+<h1>Gerador de Gráfico Pizza</h1>
+<br>
+<div id="grafico" style="margin-left:-6px;"></div>
+
+<py-script output="grafico">
+import matplotlib.pyplot as plt
+
+labels = []
+quant = []
+
+titulo = input().strip().title()
+
+def addDado():
+	label = 'label'
+	quantia = 1
+	while(label!='0' and quantia!=0 and len(labels)<6):
+		label = input().strip().title()
+		if(label=='0'):
+			break
+		quantia = float(input().strip())
+		if(quantia>0):
+			labels.append(label)
+			quant.append(quantia)
+		else:
+			break
+
+addDado()
+
+fig, ax = plt.subplots(figsize=(4,3), dpi=155)
+ax.pie(quant, labels=labels, autopct='%.1f%%', startangle=90, shadow=False)
+ax.set_title(titulo)
+
+fig
+</py-script>
+<p style="margin-top:-18px">Desenvolvido por Felipe Carlos, aluno de Ciência da Computação, Belém-PA</p>
+<br>
+</body>
+</html>
